@@ -22,8 +22,8 @@ class QueryString {
     bool containsQueryParams = url.contains("?");
     String strQuery = containsQueryParams ? '':'?';
     query.forEach((key, value) {
-      strQuery += '${key}=${value}&';
+      strQuery += '&${key}=${value}';
      });
-     return url + strQuery.substring(0,strQuery.length-1);
+     return url + strQuery.replaceAll('\?\&', '?');
   }
 }
