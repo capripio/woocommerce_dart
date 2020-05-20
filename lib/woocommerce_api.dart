@@ -166,11 +166,11 @@ class WooCommerceAPI {
     }
   }
 
-  Future<dynamic> getAsync(String endPoint, Map data) async {
+  Future<dynamic> getAsync(String endPoint, {Map data}) async {
     String url = this._getOAuthURL("GET", endPoint);
-
+    url = data == null ? url : QueryString.query(url, data);
     try {
-      final http.Response response = await http.get(QueryString.query(url, data));
+      final http.Response response = await http.get(url);
       if (response.statusCode == 200) {
         return json.decode(response.body);
       }
