@@ -18,7 +18,10 @@ class QueryString {
     return result;
   }
 
-  static String query(String url,Map query){
+  static String query(String url,{Map query}){
+    if(query == null){
+      return url;
+    }
     bool containsQueryParams = url.contains("?");
     String strQuery = containsQueryParams ? '':'?';
     query.forEach((key, value) {
