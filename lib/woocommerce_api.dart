@@ -12,6 +12,8 @@ import 'package:woocommerce_api/query_string.dart';
 import 'package:http/http.dart' as http;
 import 'package:woocommerce_api/woocommerce_error.dart';
 
+import 'query_string.dart';
+
 /// [url] is you're site's base URL, e.g. `https://www.yourdomain.com`
 ///
 /// [consumerKey] is the consumer key provided by WooCommerce, e.g. `ck_1a2b3c4d5e6f7g8h9i`
@@ -164,11 +166,11 @@ class WooCommerceAPI {
     }
   }
 
-  Future<dynamic> getAsync(String endPoint) async {
+  Future<dynamic> getAsync(String endPoint, Map data) async {
     String url = this._getOAuthURL("GET", endPoint);
 
     try {
-      final http.Response response = await http.get(url);
+      final http.Response response = await http.get(QueryString.query(url, data));
       if (response.statusCode == 200) {
         return json.decode(response.body);
       }

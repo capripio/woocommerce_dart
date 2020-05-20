@@ -17,4 +17,13 @@ class QueryString {
 
     return result;
   }
+
+  static String query(String url,Map query){
+    bool containsQueryParams = url.contains("?");
+    String strQuery = containsQueryParams ? '':'?';
+    query.forEach((key, value) {
+      strQuery += '${key=value}';
+     });
+     return url + strQuery;
+  }
 }
